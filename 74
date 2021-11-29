@@ -1,0 +1,76 @@
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+using namespace std;
+
+const int TAB = 200;
+string tab[TAB];
+
+bool cyfra(char c) 
+{
+  return (c >= '0' && c <= '9');
+}
+
+bool tylkocyfra(string s) 
+{
+	
+  for (int i = 0; i < s.length(); i++) 
+  {
+  	
+    if (!cyfra(s[i]))
+    {
+	return false;
+	}
+	
+  }
+  
+  return true;
+}
+
+void zadanie1() 
+{
+  int licznik = 0;
+  
+  for (int i = 0; i < TAB; i++) 
+  {
+    if (tylkocyfra(tab[i])) 
+	{
+		licznik++;	
+	}
+  }
+  cout <<"Liczba hasel zlozonych tylko z cyfr: " <<licznik<<"\n \n";
+}
+
+void zadanie2() {
+  cout << "Hasla uzyte kilkukrotnie:" << endl;
+
+  for (int i = 0; i < TAB; i++) {
+    for (int j = 0; j < TAB; j++) 
+	{
+      if (i == j) 
+	  {
+	  	continue;
+	  }
+	  
+      if (tab[i] == tab[j])
+		{
+        cout << tab[i] << endl;
+        i++;
+        break;
+        }
+    }
+  }
+  cout << endl;
+}
+
+
+int main() {
+  ifstream plik("hasla.txt");
+  for (int i = 0; i < TAB; i++) plik >> tab[i];
+  plik.close();
+  sort(tab, tab + TAB);
+
+  zadanie1();
+  zadanie2();
+}
+//kacpersolecki
